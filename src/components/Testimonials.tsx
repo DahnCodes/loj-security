@@ -1,5 +1,8 @@
+import FadeIn from "./animation/FadeIn";
+
 export default function Testimonials() {
   return (
+    <FadeIn>
     <section className="bg-white py-24">
       <div className="max-w-7xl mx-auto px-6 text-center">
         {/* Heading */}
@@ -75,5 +78,7 @@ export default function Testimonials() {
         </div>
       </div>
     </section>
+
+    </FadeIn>
   );
 }

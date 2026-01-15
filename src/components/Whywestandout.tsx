@@ -1,7 +1,9 @@
 import Image from "next/image";
+import FadeIn from "./animation/FadeIn";
 
 export function Why() {
   return (
+    <FadeIn>
     <section className="relative py-16 px-4 sm:px-8 lg:px-16">
       <div className="flex flex-col-reverse lg:flex-row items-center lg:justify-between gap-10 lg:gap-16">
         {/* Left Content */}
@@ -57,5 +59,6 @@ export function Why() {
         </div>
       </div>
     </section>
+    </FadeIn>
   );
 }

@@ -1,9 +1,11 @@
+import FadeIn from "./animation/FadeIn"
 import Button from "./ui/Button"
 import { Servicecard } from "./ui/Servicecard"
 
 export function Services() {
   return (
-    <section className="w-full px-4 sm:px-8 lg:px-[100px] py-16">
+    <FadeIn>
+    <section className="w-full px-4 sm:px-8 lg:px-25 py-16">
       <div className="flex flex-col lg:flex-row gap-16 items-start">
 
         {/* LEFT CONTENT */}
@@ -60,5 +62,7 @@ export function Services() {
 
       </div>
     </section>
+
+    </FadeIn>
   )
 }
