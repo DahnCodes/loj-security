@@ -1,7 +1,15 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 
 export default function Footer() {
+
+   const phonenumber = "+2349031340508";
+
+  const handleCall = () => {
+    window.location.href = `tel:${phonenumber}`;
+  };
+
   return (
     <footer className="bg-[#FFF5E5] w-full pt-28">
       {/* CTA CARDS */}
@@ -26,7 +34,7 @@ export default function Footer() {
             <h3 className="text-2xl font-semibold mb-4">
               Need to Talk To <br /> A Security Expert?
             </h3>
-            <button className="bg-white text-[#2AA44F] px-6 py-3 rounded-md w-fit font-medium hover:opacity-90 transition">
+            <button className="bg-white text-[#2AA44F] px-6 py-3 rounded-md w-fit font-medium hover:opacity-90 transition" onClick={handleCall}>
               Book a call now
             </button>
           </div>
