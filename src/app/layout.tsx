@@ -11,7 +11,9 @@ const zalandoSans = Zalando_Sans({
 export const metadata: Metadata = {
   title: "Lion of Judah Security",
   description: "Professional security services",
+ 
 };
+
 
 export default function RootLayout({
   children,
