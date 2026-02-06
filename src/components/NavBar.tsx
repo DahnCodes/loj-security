@@ -23,9 +23,9 @@ export function NavBar() {
           <Image
             src="/images/lojlogo.png"
             alt="Logo"
-            width={136}
+            width={156}
             height={52}
-            className="h-auto w-30 md:w-34"
+            className="h-auto"
           />
 
           {/* Desktop Menu */}
@@ -61,7 +61,7 @@ export function NavBar() {
           <Image
             src="/images/lojlogo.png"
             alt="Logo"
-            width={120}
+            width={320}
             height={40}
           />
           <button onClick={() => setOpen(false)} className="text-gray-800">

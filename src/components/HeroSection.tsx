@@ -11,7 +11,7 @@ export function HeroSection() {
   return (
     <section className="relative flex min-h-screen w-full items-center justify-center px-4 py-20 sm:px-8">
       <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-        <span className="border border-b-[#998259] rounded-[100px] lg:p-2.5 text-center mb-2 backdrop-blur-3xl">
+        <span className="text-white bg-[#2AA44F] rounded-[100px] lg:p-2.5 text-center mb-2 shadow-lg px-4">
           Nigeria&apos;s number one security agency
         </span>
         <h1 className="mb-6 text-3xl font-semibold leading-tight sm:text-4xl md:text-5xl">
