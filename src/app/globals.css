@@ -1,9 +1,7 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-body {
-  /* background-color: #e6ccb2; */
-  width: 100%;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  font-family: "Zalando Sans", sans-serif;
-}
+:root { scroll-behavior: smooth; }
+body { width: 100%; overflow-x: hidden; background: #f8f5ed; color: #252923; font-family: var(--font-open-sans), Arial, sans-serif; }
+h1, h2, h3 { font-family: var(--font-bebas-neue), Impact, sans-serif; font-weight: 400; letter-spacing: 0; }
+section[id] { scroll-margin-top: 1rem; }
+@media (prefers-reduced-motion: reduce) { :root { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }

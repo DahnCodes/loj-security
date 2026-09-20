@@ -1,114 +1,30 @@
-"use client"
-import Image from "next/image"
-import Link from "next/link"
+import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowUpRight, Phone } from 'lucide-react'
+import FadeIn from './animation/FadeIn'
+
+const links = [
+  { label: 'Home', href: '#home' },
+  { label: 'Services', href: '#services' },
+  { label: 'About us', href: '#about' },
+]
 
 export default function Footer() {
-
-   const phonenumber = "+2349031340508";
-
-  const handleCall = () => {
-    window.location.href = `tel:${phonenumber}`;
-  };
-
   return (
-    <footer className="bg-[#FFF5E5] w-full pt-28">
-      {/* CTA CARDS */}
-      <div className="relative max-w-7xl mx-auto px-6 -mt-40 z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden shadow-lg">
-          {/* Left Card */}
-          <div className="bg-[#FFEBCF] p-10 flex flex-col justify-center">
-            <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-              Your Safety Starts With a Trusted Partner.
-            </h3>
-            <p className="text-gray-700 mb-6">
-              We provide dependable security solutions designed to give you
-              confidence, peace of mind, and reliable protection.
-            </p>
-            <button className="bg-[#6A4C2F] text-white px-6 py-3 rounded-md w-fit hover:opacity-90 transition">
-              Request a Quote
-            </button>
-          </div>
-
-          {/* Right Card */}
-          <div className="bg-[#2AA44F] p-10 flex flex-col justify-center text-white">
-            <h3 className="text-2xl font-semibold mb-4">
-              Need to Talk To <br /> A Security Expert?
-            </h3>
-            <button className="bg-white text-[#2AA44F] px-6 py-3 rounded-md w-fit font-medium hover:opacity-90 transition" onClick={handleCall}>
-              Book a call now
-            </button>
-          </div>
+    <footer id='contact' className='bg-[#202820] text-[#f8f5ed]'>
+      <div className='mx-auto max-w-[1440px] px-5 pt-20 sm:px-8 lg:px-14 lg:pt-28'>
+        <div className='grid gap-10 border-b border-white/20 pb-20 lg:grid-cols-[1fr_auto] lg:items-end'>
+          <FadeIn>
+            <p className='mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#c4a160]'>Contact</p>
+            <h2 className='max-w-3xl text-[clamp(2.5rem,5vw,5rem)] leading-[1.07]'>Let’s talk about what you need to protect.</h2>
+          </FadeIn>
+          <a href='tel:+2349031340508' className='inline-flex min-h-14 items-center justify-center gap-3 bg-[#c4a160] px-7 py-4 text-sm font-bold text-[#202820] transition-transform active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#c4a160]'><Phone size={17} aria-hidden='true' /> Call +234 903 134 0508 <ArrowUpRight size={17} aria-hidden='true' /></a>
         </div>
-      </div>
-
-      {/* MAIN FOOTER */}
-      <div className="max-w-7xl mx-auto px-6 pt-32 pb-10">
-        {/* Top row */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-10 border-b border-[#E5D8C3] pb-12">
-          {/* Logo & text */}
-          <div className="max-w-md">
-            <div className="flex items-center gap-3 mb-4">
-              <Image src="/images/lojlogo.png" alt="Logo" width={60} height={60} />
-              <span className="font-semibold text-lg">Lion of Judah</span>
-            </div>
-            <p className="text-gray-700">
-              Dependable Security For Places & People That matter.
-            </p>
-          </div>
-
-          {/* Links */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-12 text-sm">
-            <div>
-              <h4 className="font-semibold mb-4">Product</h4>
-              <ul className="space-y-3 text-gray-700">
-                <li>Features</li>
-                <li>Pricing</li>
-                <li>Case Studies</li>
-                <li>Reviews</li>
-                <li>Updates</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-3 text-gray-700">
-                <li>About us</li>
-                <li>Contact us</li>
-                <li>Careers</li>
-                <li>Culture</li>
-                <li>Blog</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Support</h4>
-              <ul className="space-y-3 text-gray-700">
-                <li>Getting started</li>
-                <li>Help center</li>
-                <li>Server status</li>
-                <li>Report a bug</li>
-                <li>Chat support</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Big watermark text */}
-          <div className="hidden lg:block text-[72px] font-bold text-[#E5D8C3] leading-none text-right">
-            LION <br /> OF <br /> JUDAH
-          </div>
+        <div className='grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1fr_auto]'>
+          <div><Link href='#home' aria-label='Lion of Judah Security, back to top' className='inline-block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#c4a160]'><Image src='/images/lojlogo.png' alt='Lion of Judah Security' width={160} height={54} className='h-auto w-40 brightness-0 invert' /></Link><p className='mt-4 max-w-sm text-sm leading-6 text-[#bec8bb]'>Guarding, patrol, event security, and surveillance services.</p></div>
+          <nav aria-label='Footer navigation' className='flex flex-wrap items-start gap-x-8 gap-y-4 text-sm font-medium'>{links.map((link) => <Link key={link.href} href={link.href} className='hover:text-[#c4a160] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#c4a160]'>{link.label}</Link>)}</nav>
         </div>
-
-        {/* Bottom row */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 text-sm text-gray-600">
-          <p>Copyright © 2026 Vikstanli Multimedia | All Rights Reserved</p>
-
-          <div className="flex gap-4 mt-4 md:mt-0">
-            <Link href="#"><i className="fab fa-facebook-f"></i></Link>
-            <Link href="#"><i className="fab fa-twitter"></i></Link>
-            <Link href="#"><i className="fab fa-linkedin-in"></i></Link>
-            <Link href="#"><i className="fab fa-instagram"></i></Link>
-          </div>
-        </div>
+        <div className='flex items-center justify-between gap-2 border-t border-white/20 py-6 text-[10px] sm:text-xs text-[#aeb7a9]'><p>© {new Date().getFullYear()} Lion of Judah Security.</p><p>Vikstanli Multimedia</p></div>
       </div>
     </footer>
   )

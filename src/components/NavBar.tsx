@@ -1,86 +1,79 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowUpRight, Menu, X } from 'lucide-react'
+
+const links = [
+  { label: 'Home', href: '#home' },
+  { label: 'Services', href: '#services' },
+  { label: 'About us', href: '#about' },
+  { label: 'Contact', href: '#contact' },
+]
 
 export function NavBar() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
+  const menuButton = useRef<HTMLButtonElement>(null)
+  const closeButton = useRef<HTMLButtonElement>(null)
+  const menu = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    closeButton.current?.focus()
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
+        menuButton.current?.focus()
+      }
+      if (event.key !== 'Tab' || !menu.current) return
+      const items = Array.from(menu.current.querySelectorAll<HTMLElement>('a, button'))
+      const first = items[0]
+      const last = items[items.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last?.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first?.focus()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [open])
+
+  const closeMenu = () => {
+    setOpen(false)
+    menuButton.current?.focus()
+  }
 
   return (
-    <>
-      {/* BACKDROP BLUR (only when menu is open) */}
-      {open && (
-        <div
-          onClick={() => setOpen(false)}
-          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-md"
-        />
-      )}
-
-      <nav className="sticky top-0 z-50 w-full bg-white border-b border-black/5">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-8">
-          {/* Logo */}
-          <Image
-            src="/images/lojlogo.png"
-            alt="Logo"
-            width={156}
-            height={52}
-            className="h-auto"
-          />
-
-          {/* Desktop Menu */}
-          <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-800">
-            {["Home", "About Us", "Services", "FAQ"].map((item) => (
-              <li
-                key={item}
-                className="relative cursor-pointer transition hover:text-black after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-black after:transition-all hover:after:w-full"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          {/* Mobile Button */}
-          <button
-            onClick={() => setOpen(true)}
-            className="md:hidden text-gray-800"
-          >
-            <Menu size={26} />
-          </button>
+    <header className='sticky top-0 z-50 bg-[#f8f5ed] text-[#252923]'>
+      <nav aria-label='Primary navigation' className='mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 py-4 sm:px-8 lg:px-14'>
+        <Link href='#home' aria-label='Lion of Judah Security, home' className='shrink-0 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#aa8748]'>
+          <Image src='/images/lojlogo.png' alt='Lion of Judah Security' width={160} height={54} priority className='h-auto w-[132px] sm:w-[156px]' />
+        </Link>
+        <div className='hidden items-center gap-8 lg:flex'>
+          {links.map((link) => <Link key={link.href} href={link.href} className='text-sm font-medium transition-colors hover:text-[#927139] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#aa8748]'>{link.label}</Link>)}
         </div>
+        <a href='tel:+2349031340508' className='hidden items-center gap-2 border border-[#aa8748] px-5 py-3 text-sm font-semibold transition-colors hover:bg-[#aa8748] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#aa8748] sm:inline-flex'>Call +234 903 134 0508 <ArrowUpRight size={16} aria-hidden='true' /></a>
+        <button ref={menuButton} type='button' aria-label='Open navigation menu' aria-expanded={open} aria-controls='mobile-navigation' onClick={() => setOpen(true)} className='inline-flex min-h-11 min-w-11 items-center justify-center border border-[#cfc7b6] lg:hidden'><Menu size={23} aria-hidden='true' /></button>
       </nav>
-
-      {/* SLIDE-IN MENU */}
-      <div
-        className={`fixed top-0 right-0 z-50 h-full w-[80%] max-w-sm bg-white shadow-xl transform transition-transform duration-300 ${
-          open ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        {/* Header with X */}
-        <div className="flex items-center justify-between p-6 border-b">
-          <Image
-            src="/images/lojlogo.png"
-            alt="Logo"
-            width={320}
-            height={40}
-          />
-          <button onClick={() => setOpen(false)} className="text-gray-800">
-            <X size={28} />
-          </button>
+      {open && (
+        <div className='fixed inset-0 z-50 lg:hidden'>
+          <div aria-hidden='true' onClick={closeMenu} className='absolute inset-0 bg-[#171d19]/70' />
+          <div id='mobile-navigation' ref={menu} role='dialog' aria-modal='true' aria-label='Navigation menu' className='absolute right-0 top-0 flex h-full w-[min(86vw,390px)] flex-col bg-[#f8f5ed] p-6 shadow-2xl'>
+            <div className='flex items-center justify-between border-b border-[#ded7c8] pb-6'>
+              <span className='text-sm font-bold uppercase tracking-[0.16em]'>Menu</span>
+              <button ref={closeButton} type='button' aria-label='Close navigation menu' onClick={closeMenu} className='flex h-11 w-11 items-center justify-center border border-[#cfc7b6]'><X size={22} aria-hidden='true' /></button>
+            </div>
+            <div className='flex flex-col gap-1 py-7'>
+              {links.map((link) => <Link key={link.href} href={link.href} onClick={closeMenu} className='border-b border-[#e5dfd2] py-4 text-xl font-medium focus-visible:outline-2 focus-visible:outline-[#aa8748]'>{link.label}</Link>)}
+            </div>
+            <a href='tel:+2349031340508' onClick={closeMenu} className='mt-auto bg-[#aa8748] px-5 py-4 text-center text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#aa8748]'>Call +234 903 134 0508</a>
+          </div>
         </div>
-
-        <ul className="flex flex-col gap-6 px-8 py-10 text-lg font-medium text-gray-800">
-          {["Home", "About Us", "Services", "FAQ"].map((item) => (
-            <li
-              key={item}
-              onClick={() => setOpen(false)}
-              className="cursor-pointer hover:text-black transition"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
-  );
+      )}
+    </header>
+  )
 }

@@ -1,21 +1,27 @@
-import Image from "next/image";
+import Image from 'next/image'
+import { ArrowUpRight } from 'lucide-react'
 
 type ServicecardProps = {
-  imageSrc: string;
-  title: string;
-  description: string;
-};
+  number: string
+  imageSrc: string
+  title: string
+  description: string
+}
 
-export function Servicecard({ imageSrc, title, description }: ServicecardProps) {
+export function Servicecard({ number, imageSrc, title, description }: ServicecardProps) {
   return (
-    <div className="border border-[#998259] bg-white p-6 rounded-lg w-full">
-      <div className="lg:flex flex-row gap-8.5 items-center sm:flex flex-col">
-        <Image src={imageSrc} alt="image" width={66} height={66} />
-        <div className="flex flex-col gap-2.5">
-          <h2 className="font-bold">{title}</h2>
-          <p>{description}</p>
+    <article className='group flex min-h-[235px] flex-col justify-between border border-[#ded7c8] bg-white p-6 sm:p-8'>
+      <div className='flex items-start justify-between gap-4'>
+        <span className='text-xs font-semibold tracking-[0.16em] text-[#927139]'>{number} / SERVICE</span>
+        <Image src={imageSrc} alt='' width={66} height={66} className='h-[66px] w-[66px]' />
+      </div>
+      <div className='mt-8'>
+        <h3 className='text-2xl tracking-[-0.025em]'>{title}</h3>
+        <div className='mt-3 flex items-end justify-between gap-4'>
+          <p className='max-w-sm text-sm leading-6 text-[#5d6259]'>{description}</p>
+          <ArrowUpRight size={19} aria-hidden='true' className='shrink-0 text-[#927139]' />
         </div>
       </div>
-    </div>
-  );
+    </article>
+  )
 }

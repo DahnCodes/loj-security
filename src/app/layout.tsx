@@ -1,30 +1,25 @@
-import type { Metadata } from "next";
-import { Zalando_Sans } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next'
+import { Bebas_Neue, Open_Sans } from 'next/font/google'
+import './globals.css'
 
-const zalandoSans = Zalando_Sans({
-  subsets: ["latin"],
-  variable: "--font-zalando",
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
+const bebasNeue = Bebas_Neue({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-bebas-neue',
+  display: 'swap',
+})
+
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  variable: '--font-open-sans',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: "Lion of Judah Security",
-  description: "Professional security services",
- 
-};
+  title: 'Lion of Judah Security',
+  description: 'Guarding, patrol, event security, and surveillance services.',
+}
 
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body className={`${zalandoSans.variable} antialiased`}>
-        {children}
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return <html lang='en'><body className={`${bebasNeue.variable} ${openSans.variable}`}>{children}</body></html>
 }
